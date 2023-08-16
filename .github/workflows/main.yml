@@ -1,0 +1,39 @@
+name: Build Meshtastic Firmware
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install wget g++ zip vim ca-certificates
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install --upgrade pip
+          pip install platformio
+
+      - name: Clone MeshtastiFirmware Repository
+        run: |
+          git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware
+          cd /tmp/firmware
+          chmod +x ./bin/build-native.sh
+          source venv/bin/activate
+          ./bin/build-native.sh
+
+      - name: Copy Firmware to Repository
+        run: |
+          cp /tmp/firmware/release/meshtasticd_linux_amd64 $GITHUB_WORKSPACE/
