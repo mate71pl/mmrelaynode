@@ -31,6 +31,8 @@ jobs:
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
 
-      - name: Copy Firmware to Repository
-        run: |
-          mv /tmp/firmware/release/meshtasticd_linux_amd64 $GITHUB_WORKSPACE/
+      - name: Upload Firmware Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: meshtastic-firmware
+          path: $GITHUB_WORKSPACE/meshtasticd_linux_amd64
