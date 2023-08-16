@@ -30,8 +30,7 @@ jobs:
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
-          ls -al /tmp/firmware/release
 
       - name: Copy Firmware to Repository
         run: |
-          cp /tmp/firmware/release/meshtasticd_linux_amd64 $GITHUB_WORKSPACE/
+          mv /tmp/firmware/release/meshtasticd_linux_amd64 $GITHUB_WORKSPACE/
