@@ -20,9 +20,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -y install wget g++ zip vim ca-certificates
-          python3 -m venv venv
-          source venv/bin/activate
+          sudo apt-get -y install wget g++ zip ca-certificates
           pip install --upgrade pip
           pip install platformio
 
@@ -31,7 +29,6 @@ jobs:
           git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
-          source venv/bin/activate
           ./bin/build-native.sh
 
       - name: Copy Firmware to Repository
