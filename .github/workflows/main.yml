@@ -30,24 +30,14 @@ jobs:
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
-  
-      - name: Upload firmware artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: meshtastic-firmware
-          path: /tmp/firmware/release/meshtasticd_linux_amd64
           
-      - name: Download artifact
-        uses: actions/download-artifact@v2
+- name: Upload firmware to release
+        uses: svenstaro/upload-release-action@v2
         with:
-          name: meshtastic-firmware
-          path: ./bin
-      
-      - name: Copy artifact to bin folder
-        run: cp -R ./bin ./
-      
-      - name: Publish bin folder to main repository
-        run: git add ./bin
-          git commit -m "Publish bin folder"
-          git push
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /tmp/firmware/release/meshtasticd_linux_amd64
+          asset_name: meshtasticd_linux_amd64
+          tag: ${{ github.ref }}
+          overwrite: true
+          body: "Meshtastive native"
       
