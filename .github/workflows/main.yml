@@ -1,4 +1,4 @@
-name: Build Meshtastic Firmware
+name: Build Meshtastic firmware
 
 on:
   push:
@@ -9,30 +9,43 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set Up Python 3
+      - name: Set up Python 3
         uses: actions/setup-python@v2
         with:
           python-version: 3.x
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
           sudo apt-get -y install wget g++ zip ca-certificates
           pip install --upgrade pip
           pip install platformio
 
-      - name: Clone Meshtastic Repository And Compile Firmware
+      - name: Clone Meshtastic repository and compile firmware
         run: |
           git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
 
-      - name: Upload Firmware Artifact
+      - name: Upload firmware artifact
         uses: actions/upload-artifact@v2
         with:
           name: meshtastic-firmware
           path: /tmp/firmware/release/meshtasticd_linux_amd64
+          
+      - name: Download firmware artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: meshtastic-firmware
+
+      - name: Move artifact to /bin
+        run: mv ${{ github.workspace }}/meshtastic-firmware/meshtasticd_linux_amd64 ${{ github.workspace }}/bin/
+
+      - name: Publish bin folder to main repository
+        run: git add ./bin
+        git commit -m "Publish new firmware"
+        git push
