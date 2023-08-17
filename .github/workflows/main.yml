@@ -48,6 +48,6 @@ jobs:
       
       - name: Publish bin folder to main repository
         run: git add ./bin
-        git commit -m "Publish bin folder"
-        git push
+          git commit -m "Publish bin folder"
+          git push
       
