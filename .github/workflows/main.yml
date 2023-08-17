@@ -30,18 +30,14 @@ jobs:
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
+          mv /tmp/firmware/release/meshtasticd_linux_amd64 /bin/meshtasticd_linux_amd64
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v2
         with:
           name: meshtastic-firmware
-          path: /tmp/firmware/release/meshtasticd_linux_amd64
+          path: /bin/meshtasticd_linux_amd64
           
-      - name: Download firmware artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: meshtastic-firmware
-
       - name: Move artifact to /bin
         run: mv ${{ github.workspace }}/meshtastic-firmware/ ${{ github.workspace }}/bin/
 
