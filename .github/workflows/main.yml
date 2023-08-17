@@ -43,7 +43,7 @@ jobs:
           name: meshtastic-firmware
 
       - name: Move artifact to /bin
-        run: mv ${{ github.workspace }}/meshtastic-firmware/meshtasticd_linux_amd64 ${{ github.workspace }}/bin/
+        run: mv ${{ github.workspace }}/meshtastic-firmware/ ${{ github.workspace }}/bin/
 
       - name: Publish bin folder to main repository
         run: git add ./bin
