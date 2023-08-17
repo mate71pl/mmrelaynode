@@ -30,7 +30,7 @@ jobs:
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
-          mv /tmp/firmware/release/meshtasticd_linux_amd64 /bin/meshtasticd_linux_amd64
+          sudo mv /tmp/firmware/release/meshtasticd_linux_amd64 /bin/meshtasticd_linux_amd64
 
       - name: Upload firmware artifact
         uses: actions/upload-artifact@v2
