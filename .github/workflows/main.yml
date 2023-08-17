@@ -31,7 +31,7 @@ jobs:
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
           
-- name: Upload firmware to release
+      - name: Upload firmware to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
