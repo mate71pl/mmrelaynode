@@ -30,14 +30,15 @@ jobs:
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
+          cd /tmp/firmware/release/
           
       - name: Upload firmware to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /tmp/firmware/release/meshtasticd_linux_amd64
+          file: meshtasticd_linux_amd64
           asset_name: meshtasticd_linux_amd64
           tag: ${{ github.ref }}
           overwrite: true
-          body: "Meshtastive native"
+          body: "Meshtastic native"
       
