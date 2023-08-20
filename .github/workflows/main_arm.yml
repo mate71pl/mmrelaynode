@@ -1,0 +1,47 @@
+name: Build Meshtastic firmware for ARM
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get -y install wget g++ zip ca-certificates
+          pip install --upgrade pip
+          pip install platformio
+          
+      - name: Clone Meshtastic repository and compile firmware
+        run: |
+          git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware
+          cd /tmp/firmware
+          chmod +x ./bin/build-native.sh
+          sed -i 's/environment native/environment linux-arm/g; s/meshtasticd_linux_amd64/meshtasticd_linux_arm/g' ./bin/build-native.sh
+          ./bin/build-native.sh
+          # Extract tag from version.properties 
+          TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
+          echo "TAG=$TAG" >> $GITHUB_ENV  # Set variable for next steps
+          
+      - name: Upload firmware to release
+        id: upload-release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /tmp/firmware/release/meshtasticd_linux_arm
+          asset_name: meshtasticd_linux_arm
+          tag: ${{ env.TAG }}
+          overwrite: true
+          body: "Meshtastic ARM firmware"
