@@ -1,4 +1,3 @@
-name: Build Meshtastic firmware
 
 on:
   push:
@@ -23,18 +22,16 @@ jobs:
           sudo apt-get -y install wget g++ zip ca-certificates
           pip install --upgrade pip
           pip install platformio
-
+          
       - name: Clone Meshtastic repository and compile firmware
         run: |
           git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
-
           # Extract tag from version.properties 
-          TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)          
-
-
+          export TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
+          
       - name: Upload firmware to release
         uses: svenstaro/upload-release-action@v2
         with:
@@ -44,4 +41,3 @@ jobs:
           tag: ${{ env.TAG }}
           overwrite: true
           body: "Meshtastic native"
-      
