@@ -1,3 +1,4 @@
+name: Build Meshtastic firmware
 
 on:
   push:
@@ -30,14 +31,16 @@ jobs:
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
           # Extract tag from version.properties 
-          export TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
+          TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
+          echo "TAG=$TAG" >> $GITHUB_ENV  
           
       - name: Upload firmware to release
+        id: upload-release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: /tmp/firmware/release/meshtasticd_linux_amd64
           asset_name: meshtasticd_linux_amd64
-          tag: ${{ env.TAG }}
+          tag: ${{ steps.build.outputs.TAG }}
           overwrite: true
           body: "Meshtastic native"
