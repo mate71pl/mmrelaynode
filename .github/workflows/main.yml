@@ -30,14 +30,18 @@ jobs:
           cd /tmp/firmware
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
-          
+
+          # Extract tag from the ref (e.g., refs/tags/v1.0.0 -> v1.0.0)
+          TAG=$(echo "${{ github.ref }}" | sed -e 's/refs\/tags\///')          
+
+
       - name: Upload firmware to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: /tmp/firmware/release/meshtasticd_linux_amd64
           asset_name: meshtasticd_linux_amd64
-          tag: ${{ github.ref }}
+          tag: ${{ env.TAG }}
           overwrite: true
           body: "Meshtastic native"
       
