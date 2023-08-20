@@ -31,8 +31,8 @@ jobs:
           chmod +x ./bin/build-native.sh
           ./bin/build-native.sh
 
-          # Extract tag from the ref (e.g., refs/tags/v1.0.0 -> v1.0.0)
-          TAG=$(echo "${{ github.ref }}" | sed -e 's/refs\/tags\///')          
+          # Extract tag from version.properties 
+          TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)          
 
 
       - name: Upload firmware to release
