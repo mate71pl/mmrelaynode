@@ -32,7 +32,7 @@ jobs:
           ./bin/build-native.sh
           # Extract tag from version.properties 
           TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
-          echo "TAG=$TAG" >> $GITHUB_ENV  # Ustawienie zmiennej środowiskowej dla kolejnych kroków
+          echo "TAG=$TAG" >> $GITHUB_ENV  # Set variable for next steps
           
       - name: Upload firmware to release
         id: upload-release
