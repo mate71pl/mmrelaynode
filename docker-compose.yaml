@@ -1,0 +1,13 @@
+version: '3'
+services:
+  mmrelaynode:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mmrelaynode:latest
+    container_name: meshtastic-node
+    ports:
+      - "4403:4403"
+    environment:
+      HWID: "1234"
+
