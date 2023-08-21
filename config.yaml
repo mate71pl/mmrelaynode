@@ -11,6 +11,7 @@ matrix_rooms: # Needs at least 1 room & channel, but supports all Meshtastic cha
 
 meshtastic:
   connection_type: network # Do not change!
+  # serial_port: /dev/ttyUSB0 # Only used when connection is "serial"
   host: "localhost" # Do not change!
   meshnet_name: "Your Meshnet Name" # This is displayed in full on Matrix, but is truncated when sent to a Meshnet
   broadcast_enabled: true
