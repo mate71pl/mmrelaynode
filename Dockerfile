@@ -1,5 +1,4 @@
-FROM frolvlad/alpine-glibc
-#FROM alpine:latest
+FROM frolvlad/alpine-glibc:glibc-2.34
 
 RUn apk --update add --no-cache g++ shadow && \
 	groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 mesh
