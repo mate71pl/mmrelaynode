@@ -1,0 +1,3 @@
+[submodule "meshtastic-matrix-relay"]
+	path = meshtastic-matrix-relay
+	url = https://github.com/mate-dev/meshtastic-matrix-relay
