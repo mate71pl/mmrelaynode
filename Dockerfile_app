@@ -6,16 +6,12 @@ RUN pip install --upgrade pip -qq
 
 USER mesh
 
-COPY meshtastic-matrix-relay/requirements.txt /home/mesh/requirements.txt
+COPY meshtastic-matrix-relay/requirements.txt /tmp/requirements.txt
 
-RUN pip install -qq -r /home/mesh/requirements.txt
-
-USER root
-
-RUN  mv /home/mesh/.local/bin/* /usr/local/bin/
-
-USER mesh
+RUN pip install -qq -r /tmp/requirements.txt
 
 WORKDIR /home/mesh
+
+RUN echo "export PATH=$HOME/.local/bin:$PATH" >> .bashrc
 
 CMD ["bash"]

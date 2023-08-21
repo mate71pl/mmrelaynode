@@ -3,11 +3,17 @@ services:
   mmrelaynode:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_node
     image: mmrelaynode:latest
-    container_name: meshtastic-node
+    container_name: mmrelaynode
     ports:
-      - "4403:4403"
+      - '4403:4403'
     environment:
-      HWID: "1234"
+      HWID: '1234' #change to your own hardware id
+    healthcheck:
+      test: ["NONE"]
+    volumes:
+      - mesh_volume:/home/mesh
 
+volumes:
+  mesh_volume:
