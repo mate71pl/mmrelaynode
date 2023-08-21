@@ -13,5 +13,3 @@ RUN pip install -qq -r /tmp/requirements.txt
 WORKDIR /home/mesh
 
 RUN echo "export PATH=$HOME/.local/bin:$PATH" >> .bashrc
-
-CMD ["python app/main.py"]

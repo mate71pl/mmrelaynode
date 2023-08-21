@@ -4,26 +4,27 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_node
-    image: mmrelaynode
+    image: mmrelaynode:latest
     container_name: mmrelay-node
+    restart: unless-stopped
     user: '1000:1000'
     volumes:
       - mesh_volume:/home/mesh
-    environment:
-      HWID: '12345' #change to your own hardware id
     networks:
       - mesh_net
     volumes:
       - mesh_volume:/home/mesh
     ports:
       - "4403:4403"
+    entrypoint: ["sh", "-cx", "./meshtasticd --hwid '1234'"] #change to your own hardware id
 
   mmrelaynode:
     build:
       context: .
       dockerfile: Dockerfile_app
-    image: mmrelayapp
+    image: mmrelayapp:latest
     container_name: mmrelay-app
+    restart: unless-stopped
     user: '1000:1000'
     volumes:
       - mesh_volume:/home/mesh
@@ -31,6 +32,7 @@ services:
       - ./config.yaml:/home/mesh/app/config.yaml
     networks:
       - mesh_net
+    entrypoint: ["sh", "-c", "sleep 30 && python app/main.py"]
 
 networks:
   mesh_net:
