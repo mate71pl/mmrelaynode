@@ -1,0 +1,15 @@
+FROM python:3.11-slim-bookworm
+
+RUN groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 -s /bin/bash mesh
+
+USER mesh
+
+RUN pip install --upgrade pip \
+	&& pip install -r requirements.txt
+
+
+RUN sudo mv /home/mesh/.local/bin/* /usr/local/bin/
+
+WORKDIR /home/mesh
+
+CMD ["bash"]
