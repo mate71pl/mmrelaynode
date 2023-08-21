@@ -1,0 +1,27 @@
+matrix:
+  homeserver: "https://example.matrix.org"
+  access_token: "reaalllllyloooooongsecretttttcodeeeeeeforrrrbot" # See: https://t2bot.io/docs/access_tokens/
+  bot_user_id: "@botuser:example.matrix.org"
+
+matrix_rooms: # Needs at least 1 room & channel, but supports all Meshtastic channels
+  - id: "#someroomalias:example.matrix.org" # Matrix room aliases & IDs supported
+    meshtastic_channel: 0
+  - id: "!someroomid:example.matrix.org"
+    meshtastic_channel: 2
+
+meshtastic:
+  connection_type: network # Do not change!
+  host: "localhost" # Do not change!
+  meshnet_name: "Your Meshnet Name" # This is displayed in full on Matrix, but is truncated when sent to a Meshnet
+  broadcast_enabled: true
+
+logging:
+  level: "info"
+
+plugins: # Optional plugins
+  health:
+    active: true
+  map:
+    active: true
+  nodes:
+    active: true
