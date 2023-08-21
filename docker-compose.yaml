@@ -4,16 +4,36 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_node
-    image: mmrelaynode:latest
-    container_name: mmrelaynode
-    ports:
-      - '4403:4403'
-    environment:
-      HWID: '1234' #change to your own hardware id
-    healthcheck:
-      test: ["NONE"]
+    image: mmrelaynode
+    container_name: mmrelay-node
+    user: '1000:1000'
     volumes:
       - mesh_volume:/home/mesh
+    environment:
+      HWID: '12345' #change to your own hardware id
+    networks:
+      - mesh_net
+    volumes:
+      - mesh_volume:/home/mesh
+    ports:
+      - "4403:4403"
 
+  mmrelaynode:
+    build:
+      context: .
+      dockerfile: Dockerfile_app
+    image: mmrelayapp
+    container_name: mmrelay-app
+    user: '1000:1000'
+    volumes:
+      - mesh_volume:/home/mesh
+      - ./meshtastic-matrix-relay:/home/mesh/app
+      - ./config.yaml:/home/mesh/app/config.yaml
+    networks:
+      - mesh_net
+
+networks:
+  mesh_net:
 volumes:
   mesh_volume:
+

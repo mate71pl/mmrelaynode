@@ -14,4 +14,4 @@ WORKDIR /home/mesh
 
 RUN echo "export PATH=$HOME/.local/bin:$PATH" >> .bashrc
 
-CMD ["bash"]
+CMD ["python app/main.py"]
