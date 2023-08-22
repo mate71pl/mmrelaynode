@@ -33,7 +33,7 @@ jobs:
           ./bin/build-native.sh
           # Extract tag from version.properties 
           TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
-          echo "TAG=$TAG" >> $GITHUB_ENV  # Set variable for next steps
+          echo "TAG=arm64-v$TAG" >> $GITHUB_ENV  # Set variable for next steps
           
       - name: Upload firmware to release
         id: upload-release
@@ -42,6 +42,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: /tmp/firmware/release/meshtasticd_linux_arm
           asset_name: meshtasticd_linux_arm
-          tag: ${{ env.TAG }}, arm64
+          tag: ${{ env.TAG }}
           overwrite: true
           body: "Meshtastic arm64 firmware"
