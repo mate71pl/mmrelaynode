@@ -6,8 +6,11 @@ RUN pip install --upgrade pip -qq
 
 USER mesh
 
-COPY meshtastic-matrix-relay/requirements.txt /tmp/requirements.txt
+RUN mkdir /home/mesh/app
 
-RUN pip install -qq -r /tmp/requirements.txt
+COPY ./meshtastic-matrix-relay /home/mesh/app
+COPY ./config.yaml /home/mesh/app/config.yaml
+
+RUN pip install -qq -r /home/mesh/app/requirements.txt
 
 WORKDIR /home/mesh
