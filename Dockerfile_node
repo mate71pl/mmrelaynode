@@ -3,8 +3,8 @@ FROM frolvlad/alpine-glibc:glibc-2.34
 RUN apk --update add --no-cache g++ shadow && \
         groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 mesh
 
-ADD https://github.com/mate-dev/mmrelaynode/releases/download/latest/meshtasticd_linux_amd64 /home/mesh/meshtasticd
-RUN chmod +x /home/mesh/meshtasticd
+ADD https://github.com/mate-dev/mmrelaynode/releases/latest/download/meshtasticd_linux_amd64 /home/mesh/meshtasticd_linux_amd64
+RUN chmod +x /home/mesh/meshtasticd_linux_amd64
 
 USER mesh
 
