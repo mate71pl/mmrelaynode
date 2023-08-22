@@ -29,19 +29,19 @@ jobs:
           cd /tmp/firmware
           git checkout raspi-portduino
           chmod +x ./bin/build-native.sh
-          sed -i 's/environment native/environment raspbian/g; s/meshtasticd_linux_amd64/meshtasticd_linux_arm/g' /bin/build-native.sh
+          sed -i 's/environment native/environment raspbian/g; s/meshtasticd_linux_amd64/meshtasticd_linux_arm/g' ./bin/build-native.sh
           ./bin/build-native.sh
           # Extract tag from version.properties 
           TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
-          echo "TAG=arm64-v$TAG" >> $GITHUB_ENV  # Set variable for next steps
-      
+          echo "TAG=$TAG" >> $GITHUB_ENV  # Set variable for next steps
+          
       - name: Upload firmware to release
         id: upload-release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /tmp/firmware/release/meshtasticd_linux_arm64
-          asset_name: meshtasticd_linux_arm64
-          tag: ${{ env.TAG }}
+          file: /tmp/firmware/release/meshtasticd_linux_arm
+          asset_name: meshtasticd_linux_arm
+          tag: ${{ env.TAG }}, arm64
           overwrite: true
           body: "Meshtastic arm64 firmware"
