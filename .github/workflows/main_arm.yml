@@ -1,4 +1,4 @@
-name: Build Meshtastic firmware for ARM
+name: Build Meshtastic firmware for ARM64
 
 on:
   workflow_dispatch:
@@ -41,6 +41,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: /tmp/firmware/release/meshtasticd_linux_arm
           asset_name: meshtasticd_linux_arm
-          tag: ${{ env.TAG }}
+          tag: ${{ env.TAG }}, arm64
           overwrite: true
-          body: "Meshtastic ARM firmware"
+          body: "Meshtastic arm64 firmware"
