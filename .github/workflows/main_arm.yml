@@ -19,7 +19,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -y install wget g++ zip ca-certificates
+          sudo apt-get -y install wget g++ zip ca-certificates libgpiod-dev
           pip install --upgrade pip
           pip install platformio
           
