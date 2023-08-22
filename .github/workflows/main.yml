@@ -42,4 +42,4 @@ jobs:
           asset_name: meshtasticd_linux_amd64
           tag: ${{ env.TAG }}, amd64
           overwrite: true
-          body: "Meshtastic native"
+          body: "Meshtastic amd64 firmware"
