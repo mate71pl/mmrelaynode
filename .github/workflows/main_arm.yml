@@ -29,7 +29,6 @@ jobs:
           cd /tmp/firmware
           git checkout raspi-portduino
           chmod +x ./bin/build-native.sh
-          sed -i 's/environment native/environment linux-arm/g; s/meshtasticd_linux_amd64/meshtasticd_linux_arm/g' ./bin/build-native.sh
           ./bin/build-native.sh
           # Extract tag from version.properties 
           TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
