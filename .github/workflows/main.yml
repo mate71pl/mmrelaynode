@@ -40,6 +40,6 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: /tmp/firmware/release/meshtasticd_linux_amd64
           asset_name: meshtasticd_linux_amd64
-          tag: ${{ env.TAG }}
+          tag: ${{ env.TAG }}, amd64
           overwrite: true
           body: "Meshtastic native"
