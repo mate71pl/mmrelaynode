@@ -1,8 +1,7 @@
 name: Build Meshtastic firmware
 
 on:
-  push:
-    branches: [ "master" ]
+  workflow_dispatch:
 
 jobs:
   build:
