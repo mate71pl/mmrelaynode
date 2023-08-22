@@ -33,7 +33,7 @@ jobs:
           # Extract tag from version.properties 
           TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
           echo "TAG=arm64-v$TAG" >> $GITHUB_ENV  # Set variable for next steps
-          
+          ls -al /tmp/firmware/release/
       - name: Upload firmware to release
         id: upload-release
         uses: svenstaro/upload-release-action@v2
