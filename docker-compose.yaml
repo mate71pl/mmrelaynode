@@ -1,25 +1,21 @@
 version: '3'
 services:
-  mmrelaynode:
+  mmrelayapp:
     build:
       context: .
       dockerfile: Dockerfile_app
     image: mmrelayapp:latest
     container_name: mmrelay-app
     restart: unless-stopped
-    command: sh -c 'mv /home/mesh/.* /tmp/'
     user: 1000:1000
     volumes:
       - mesh_volume:/home/mesh
-      - ./meshtastic-matrix-relay:/home/mesh/app
-      - ./config.yaml:/home/mesh/app/config.yaml
     networks:
       - mesh_net
-        #    command: sh -c 'mv tmp/.* . && rmdir tmp'
     command: sh -c 'echo "export PATH=/home/mesh/.local/bin:\$PATH" >> /home/mesh/.bashrc' 
     entrypoint: ["sh", "-c", "sleep 30 && python app/main.py"]
 
-  mmrelayapp:
+  mmrelaynode:
     build:
       context: .
       dockerfile: Dockerfile_node
@@ -29,11 +25,11 @@ services:
     user: 1000:1000
     networks:
       - mesh_net
-    volumes:
-      - mesh_volume:/home/mesh
+        #   volumes:
+        # - mesh_volume:/home/mesh
     ports:
       - 4403:4403
-    entrypoint: ["sh", "-cx", "/home/mesh/meshtasticd_linux_amd64 --hwid '1234'"] #change to your own hardware id
+    entrypoint: ["sh", "-cx", "/usr/bin/meshtasticd -d /home/mesh --hwid '12345'"] #change to your own hardware id
 
 networks:
   mesh_net:
