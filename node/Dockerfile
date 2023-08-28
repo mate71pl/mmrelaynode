@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-glibc:glibc-2.34
+FROM frolvlad/alpine-glibc:glibc-2.34 AS node
 LABEL "website"="https://github.com/mate-dev/mmrelaynode"
 RUN apk --update add --no-cache g++ shadow && \
         groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 mesh
