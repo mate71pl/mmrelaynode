@@ -1,25 +1,30 @@
 version: "3.7"
 services:
   mmrelaynode:
+    build: node
     image: mmrelaynode:latest
     container_name: mmrelay-node
     restart: unless-stopped
     user: "1000:1000"
     volumes:
-      - mesh:/home/mesh
+      - mesh:/home/mesh/node
     ports:
       - "4403:4403"
     networks:
       - mesh
     entrypoint: ["sh", "-c", "/usr/bin/meshtasticd -d /home/mesh/node -h 1234"]
 #    entrypoint: ["sh", "-c", "/usr/bin/meshtasticd -d /home/mesh/node -h $(grep -Po 'hwid: "\K[^"]+' /home/mesh/app/config.yaml)"]
+    depends_on:
+      - mmrelayapp
+      
   mmrelayapp:
+    build: app
     image: mmrelayapp:latest
     container_name: mmrelay-app
     restart: unless-stopped
     user: "1000:1000"
     volumes:
-      - mesh:/home/mesh
+      - mesh:/home/mesh/app
     networks:
       - mesh
     entrypoint: ["sh", "-c", "sleep 30 && python main.py"]
