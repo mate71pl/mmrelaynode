@@ -1,37 +1,31 @@
-version: '3'
+version: "3.7"
 services:
-  mmrelayapp:
-    build:
-      context: .
-      dockerfile: Dockerfile_app
-    image: mmrelayapp:latest
-    container_name: mmrelay-app
-    restart: unless-stopped
-    user: 1000:1000
-    volumes:
-      - mesh_volume:/home/mesh
-    networks:
-      - mesh_net
-    command: sh -c 'echo "export PATH=/home/mesh/.local/bin:\$PATH" >> /home/mesh/.bashrc' 
-    entrypoint: ["sh", "-c", "sleep 30 && python app/main.py"]
-
   mmrelaynode:
-    build:
-      context: .
-      dockerfile: Dockerfile_node
     image: mmrelaynode:latest
     container_name: mmrelay-node
     restart: unless-stopped
-    user: 1000:1000
-    networks:
-      - mesh_net
-        #   volumes:
-        # - mesh_volume:/home/mesh
+    user: "1000:1000"
+    volumes:
+      - mesh:/home/mesh
     ports:
-      - 4403:4403
-    entrypoint: ["sh", "-cx", "/usr/bin/meshtasticd -d /home/mesh --hwid '12345'"] #change to your own hardware id
+      - "4403:4403"
+    networks:
+      - mesh
+    entrypoint: ["sh", "-c", "/usr/bin/meshtasticd -d /home/mesh/node -h 1234"]
+#    entrypoint: ["sh", "-c", "/usr/bin/meshtasticd -d /home/mesh/node -h $(grep -Po 'hwid: "\K[^"]+' /home/mesh/app/config.yaml)"]
+  mmrelayapp:
+    image: mmrelayapp:latest
+    container_name: mmrelay-app
+    restart: unless-stopped
+    user: "1000:1000"
+    volumes:
+      - mesh:/home/mesh
+    networks:
+      - mesh
+    entrypoint: ["sh", "-c", "sleep 30 && python main.py"]
+
+volumes:
+  mesh:
 
 networks:
-  mesh_net:
-volumes:
-  mesh_volume:
+  mesh:

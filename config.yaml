@@ -15,6 +15,7 @@ meshtastic:
   host: "localhost" # Do not change!
   meshnet_name: "Your Meshnet Name" # This is displayed in full on Matrix, but is truncated when sent to a Meshnet
   broadcast_enabled: true
+  hwid: "12345" # Change to your Hardware ID
 
 logging:
   level: "info"
