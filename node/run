@@ -1,6 +1,0 @@
-#!/bin/sh
-HWID=$(grep 'hwid: "' /home/mesh/app/config.yaml)
-if [ -z "$HWID" ]; then
-  HWID=$(shuf -i 1000-9999 -n 1)
-fi
-/bin/meshtasticd -d /home/mesh -h $HWID
