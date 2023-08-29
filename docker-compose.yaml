@@ -5,14 +5,13 @@ services:
     image: mmrelaynode:latest
     container_name: mmrelay-node
     restart: unless-stopped
-
     volumes:
       - mesh:/home/mesh
     ports:
       - "4403:4403"
     networks:
       - mesh
-    entrypoint: ["sh", "-c", "run"]
+    entrypoint: ["sh", "-c", "meshtasticd"]
 
   mmrelayapp:
     build: app
