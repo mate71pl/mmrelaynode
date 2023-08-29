@@ -9,3 +9,6 @@ RUN pip install -qq -r /home/mesh/app/requirements.txt --no-cache-dir
 RUN echo "export PATH=/home/mesh/.local/bin:\$PATH" >> /home/mesh/.bashrc
 COPY config.yaml .
 #ENTRYPOINT ["sh", "-c", "sleep 30 && python main.py"]
+
+
+

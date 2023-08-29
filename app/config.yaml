@@ -27,3 +27,4 @@ plugins: # Optional plugins
     active: true
   nodes:
     active: true
+ 
