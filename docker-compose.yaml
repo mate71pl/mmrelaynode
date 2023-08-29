@@ -1,35 +1,35 @@
-version: "3.8"
+version: "3"
 services:
   mmrelaynode:
     build: node
     image: mmrelaynode:latest
     container_name: mmrelay-node
     restart: unless-stopped
-    user: "1000:1000"
+
     volumes:
       - mesh:/home/mesh
     ports:
       - "4403:4403"
     networks:
       - mesh
-    entrypoint: ["sh", "-c", "run.sh"]
+    entrypoint: ["sh", "-c", "run"]
 
   mmrelayapp:
     build: app
     image: mmrelayapp:latest
     container_name: mmrelay-app
     restart: unless-stopped
-    user: "1000:1000"
+    depends_on:
+      - mmrelaynode
     volumes:
       - mesh:/home/mesh
     networks:
       - mesh    
-    command: ["sh", "-c", "sleep 30"]
+    command: ["sleep 30"]
     entrypoint: ["python3", "main.py"]
 
 volumes:
   mesh:
-    external: true
 
 networks:
   mesh:
