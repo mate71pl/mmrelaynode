@@ -1,0 +1,15 @@
+meshtastic-matrix-relay/gui
+meshtastic-matrix-relay/DEVELOPMENT.md
+meshtastic-matrix-relay/mmrelay.iss
+meshtastic-matrix-relay/example_plugins  
+meshtastic-matrix-relay/LICENSE  
+meshtastic-matrix-relay/README.md  
+meshtastic-matrix-relay/sample_config.yaml
+meshtastic-matrix-relay/.gitignore
+meshtastic-matrix-relay/.git
+meshtastic-matrix-relay/.github
+meshtastic-matrix-relay/.pyenv
+meshtastic-matrix-relay/.vscode
+meshtastic-matrix-relay/meshtastic.sqlite
+meshtastic-matrix-relay/__pycache__/
+meshtastic-matrix-relay/plugins/__pycache__/
