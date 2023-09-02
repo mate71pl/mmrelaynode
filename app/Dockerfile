@@ -2,6 +2,7 @@ FROM python:3.11-slim-bookworm AS app
 LABEL "website"="https://github.com/mate-dev/mmrelaynode"
 RUN groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 -s /bin/bash mesh
 RUN pip install --upgrade pip -qq
+RUN ln -s /home/mesh/.local/bin/meshtastic /bin/meshtastic
 USER mesh
 COPY --chown=mesh:mesh meshtastic-matrix-relay /home/mesh/app
 WORKDIR /home/mesh/app
