@@ -52,7 +52,7 @@ services:
       MESHTASTIC_MESHNET_NAME: "Your Meshnet Name"
       MESHTASTIC_BROADCAST_ENABLED: "true"
       LOGGING_LEVEL: "info"
-      # Plugin environment variables (commented out for reference)
+      # Plugin environment variables
       # HEALTH_PLUGIN_ACTIVE: "true"
       # MAP_PLUGIN_ACTIVE: "true"
       # NODES_PLUGIN_ACTIVE: "true"
