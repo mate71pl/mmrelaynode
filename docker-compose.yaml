@@ -25,7 +25,7 @@ services:
       - mesh:/home/mesh
     networks:
       - mesh    
-    command: ["sh", "-c", "python3 config_wrapper.py && sleep 30 && python3 main.py"]
+    entrypoint: ["sh", "-c", "python3 config_wrapper.py && python3 main.py"]
     environment:
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
