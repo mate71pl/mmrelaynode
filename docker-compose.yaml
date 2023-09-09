@@ -13,6 +13,9 @@ services:
     networks:
       - mesh
     entrypoint: ["sh", "-c", "meshtasticd"]
+    environment:
+      MESHTASTIC_COMMAND_1: "network.wifi_enabled true --set network.wifi_ssid 'my network' --set network.wifi_psk mypassword"
+      MESHTASTIC_COMMAND_2: "another_option value --set yet_another_option another_value"
 
   mmrelayapp:
     build: app
@@ -30,7 +33,7 @@ services:
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
       MATRIX_BOT_USER_ID: "@botuser:example.matrix.org"
-      MATRIX_ROOMS_ID_1: "#someroomalias1:example.matrix.org"
+      MATRIX_ROOMS_ID_1: "#someroomalias1:example.matrix.org" # Need at least 1 room & channel mapped, maximum 8
       MATRIX_ROOMS_MESHTASTIC_CHANNEL_1: "0"
       # MATRIX_ROOMS_ID_2: "#someroomalias2:example.matrix.org"
       # MATRIX_ROOMS_MESHTASTIC_CHANNEL_2: "1"
