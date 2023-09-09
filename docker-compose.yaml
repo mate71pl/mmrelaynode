@@ -4,7 +4,7 @@ services:
   mmrelaynode:
     build: node
     image: mmrelaynode:latest
-    container_name: mmrelay-node
+    container_name: mmrelaynode-device
     restart: unless-stopped
     volumes:
       - mesh:/home/mesh
@@ -20,7 +20,7 @@ services:
   mmrelayapp:
     build: app
     image: mmrelayapp:latest
-    container_name: mmrelay-app
+    container_name: mmrelaynode-app
     restart: unless-stopped
     depends_on:
       - mmrelaynode
