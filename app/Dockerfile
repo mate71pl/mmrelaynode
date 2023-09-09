@@ -4,6 +4,7 @@ RUN groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 -s /bin/bash mesh
 RUN pip install --upgrade pip -qq
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it.sh
 RUN chmod +x /usr/local/bin/wait-for-it.sh
+RUN ln -s /home/mesh/.local/bin/meshtastic /bin/meshtastic
 USER mesh
 COPY --chown=mesh:mesh meshtastic-matrix-relay /home/mesh/app
 WORKDIR /home/mesh/app
