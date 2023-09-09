@@ -7,6 +7,8 @@ Relay operation is implemented using the **Meshtastic <=> Matrix Relay** [https:
 
 Feel free to explore the **Meshtastic** project on their website: [https://meshtastic.org](https://meshtastic.org).
 
+```
 git clone https://github.com/mate-dev/mmrelaynode.git
 cd mmrelaynode && git submodule update --init
 docker compose -f "docker-compose.yaml" up -d --build
+```
