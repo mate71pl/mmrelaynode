@@ -14,8 +14,8 @@ services:
       - mesh
     entrypoint: ["sh", "-c", "meshtasticd"]
     environment:
-      MESHTASTIC_COMMAND_1: "network.wifi_enabled true --set network.wifi_ssid 'my network' --set network.wifi_psk mypassword"
-      MESHTASTIC_COMMAND_2: "another_option value --set yet_another_option another_value"
+      MESHTASTIC_COMMAND_1: "network.wifi_enabled true --set network.wifi_ssid 'my network' --set network.wifi_psk mypassword" 
+      # You can add as many MESHTASTIC_COMMAND_X as you need, they will be executed in order
 
   mmrelayapp:
     build: app
@@ -27,8 +27,8 @@ services:
     volumes:
       - mesh:/home/mesh
     networks:
-      - mesh    
-    entrypoint: ["sh", "-c", "python3 config_wrapper.py && python3 main.py"]
+      - mesh
+    entrypoint: [ "sh", "-c", "wait-for-it.sh mmrelaynode:4403 -t 60 && python3 command_wrapper.py && python3 conf_wrapper.py && python3 main.py" ]
     environment:
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
