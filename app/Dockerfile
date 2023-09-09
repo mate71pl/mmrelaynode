@@ -7,3 +7,5 @@ COPY --chown=mesh:mesh meshtastic-matrix-relay /home/mesh/app
 WORKDIR /home/mesh/app
 RUN pip install -qq -r /home/mesh/app/requirements.txt --no-cache-dir
 RUN echo "export PATH=/home/mesh/.local/bin:\$PATH" >> /home/mesh/.bashrc
+ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /usr/local/bin/wait-for-it.sh
+RUN chmod +x /usr/local/bin/wait-for-it.sh
