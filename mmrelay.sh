@@ -40,11 +40,6 @@ display_help() {
     echo "  stop - Stop containers (optional: specify container_name)"
     echo "  restart - Restart containers (optional: specify container_name)"
     echo "  logs - Show container logs (optional: specify container_name)"
-    echo "  ps - List containers"
-    echo "  login-timescale - Log in to the TimescaleDB container"
-    echo "  login-api - Log in to the API container"
-    echo "  db-shell - Open a database shell in the TimescaleDB container"
-    echo "  menu - Enter to interactive menu"
     echo "  --help, -h - Display this help message"
 }
 
@@ -69,10 +64,6 @@ if [[ $0 == *"menu"* ]]; then
         echo "6. Stop [container_name]"
         echo "7. Restart [container_name]"
         echo "8. Logs [container_name]"
-        echo "9. PS"
-        echo "10. Login to TimescaleDB Container"
-        echo "11. Login to API Container"
-        echo "12. Database Shell (TimescaleDB)"
         echo "0. Exit"
         echo "--help, -h - Display this help message"
 
@@ -95,10 +86,6 @@ if [[ $0 == *"menu"* ]]; then
                restart "$container_name" ;;
             8) read -p "Enter container name (or press Enter for default): " container_name
                logs "$container_name" ;;
-            9) ps ;;
-            10) login-timescale ;;
-            11) login-api ;;
-            12) db-shell ;;
             0) exit ;;
             "--help" | "-h") display_help ;;
             *) echo "Invalid choice. Please try again." ;;
@@ -117,10 +104,6 @@ else
         "stop") stop "$2" ;;
         "restart") restart "$2" ;;
         "logs") logs "$2" ;;
-        "ps") ps ;;
-        "login-timescale") login-timescale ;;
-        "login-api") login-api ;;
-        "db-shell") db-shell ;;
         "--help" | "-h") display_help ;;
         *) echo "Invalid command. Use --help or -h for available commands." ;;
     esac
