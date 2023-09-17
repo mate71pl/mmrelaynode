@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   mmrelaynode:
-    build: node
+    build: device
     image: mmrelaynode:latest
     container_name: mmrelaynode-device
     restart: unless-stopped
@@ -14,9 +14,9 @@ services:
       - mesh
     entrypoint: ["sh", "-c", "meshtasticd"]
     environment:
-      MESHTASTIC_COMMAND_1: "--set-owner 'LongName' --set-owner-short 'SHRT' --set-url https://meshtastic.org/e/#CgMSAQESDAgBOAFAA0gBUB5oAQ" 
-      MESHTASTIC_COMMAND_2: "--set mqtt.enabled true --set mqtt.address mqtt.meshtastic.org --set mqtt.username meshdev --set mqtt.password large4cats"
-      MESHTASTIC_COMMAND_3: "--ch-set uplink_enabled true --ch-set downlink_enabled true --ch-index 3"
+      #   MESHTASTIC_COMMAND_1: "--set-owner 'LongName' --set-owner-short 'SHRT' --set-url https://meshtastic.org/e/#CgMSAQESDAgBOAFAA0gBUB5oAQ" 
+        #     MESHTASTIC_COMMAND_2: "--set mqtt.enabled true --set mqtt.address mqtt.meshtastic.org --set mqtt.username meshdev --set mqtt.password large4cats"
+      MESHTASTIC_COMMAND_1: "--config config.yaml"
       # You can add as many MESHTASTIC_COMMAND_X as you need, they will be executed in order with a 30 second delay between
 
   mmrelayapp:
