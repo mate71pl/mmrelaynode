@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-#Check linux distro
+# Check linux distro
 OS=$(uname -s | tr A-Z a-z)
 source /etc/os-release
 case $ID in
@@ -15,6 +15,7 @@ case $ID in
     echo -n "unsupported linux distro"
     ;;
 esac
+
 # Check and install docker and git
 if ! docker &> /dev/null; then
     echo "Docker is not installed. Installing it via the script from docker.com"
@@ -30,7 +31,7 @@ fi
 
 # Function to display help message
 display_help() {
-    echo "Usage: $0 [command] (optional container_name)"
+    echo "Usage: $0 [command] [container_name]"
     echo "Commands:"
     echo "  build - Build containers (optional: specify container_name)"
     echo "  up - Start containers (optional: specify container_name)"
@@ -43,7 +44,19 @@ display_help() {
     echo "  --help, -h - Display this help message"
 }
 
-# ... (reszta funkcji pozostaje taka sama)
+# Function to execute Docker Compose commands
+docker_compose() {
+    local command="$1"
+    local container_name="$2"
+    
+    # If container_name is empty and the command is not "logs", set it to an empty string
+    if [ -z "$container_name" ] && [ "$command" != "logs" ]; then
+        container_name=""
+    fi
+    
+    echo "$command container(s): $container_name"
+    docker compose -f docker-compose.yaml $command $container_name
+}
 
 # Check for the help flag
 if [[ "$1" == "--help" || "$1" == "-h" ]]; then
@@ -71,21 +84,21 @@ if [[ $0 == *"menu"* ]]; then
 
         case "$choice" in
             1) read -p "Enter container name (or press Enter for default): " container_name
-               build "$container_name" ;;
+               docker_compose "up -d --build" "$container_name" ;;
             2) read -p "Enter container name (or press Enter for default): " container_name
-               up "$container_name" ;;
+               docker_compose "up -d" "$container_name" ;;
             3) read -p "Enter container name (or press Enter for default): " container_name
-               start "$container_name" ;;
+               docker_compose "start" "$container_name" ;;
             4) read -p "Enter container name (or press Enter for default): " container_name
-               down "$container_name" ;;
+               docker_compose "down" "$container_name" ;;
             5) read -p "Enter container name (or press Enter for default): " container_name
-               destroy "$container_name" ;;
+               docker_compose "down -v" "$container_name" ;;
             6) read -p "Enter container name (or press Enter for default): " container_name
-               stop "$container_name" ;;
+               docker_compose "stop" "$container_name" ;;
             7) read -p "Enter container name (or press Enter for default): " container_name
-               restart "$container_name" ;;
+               docker_compose "restart" "$container_name" ;;
             8) read -p "Enter container name (or press Enter for default): " container_name
-               logs "$container_name" ;;
+               docker_compose "logs --tail=100 -f" "$container_name" ;;
             0) exit ;;
             "--help" | "-h") display_help ;;
             *) echo "Invalid choice. Please try again." ;;
@@ -95,16 +108,6 @@ if [[ $0 == *"menu"* ]]; then
     done
 else
     # If "menu" is not in the script name, execute the specified command
-    case "$1" in
-        "build") build "$2" ;;
-        "up") up "$2" ;;
-        "start") start "$2" ;;
-        "down") down "$2" ;;
-        "destroy") destroy "$2" ;;
-        "stop") stop "$2" ;;
-        "restart") restart "$2" ;;
-        "logs") logs "$2" ;;
-        "--help" | "-h") display_help ;;
-        *) echo "Invalid command. Use --help or -h for available commands." ;;
-    esac
+    docker_compose "$1" "$2"
 fi
+
