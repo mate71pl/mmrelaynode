@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  mmrelaynode:
-    build: node
+  mmrelaydevice:
+    build: device
     image: mmrelaynode:latest
     container_name: mmrelaynode-device
     restart: unless-stopped
