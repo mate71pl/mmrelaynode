@@ -1,6 +1,6 @@
-FROM frolvlad/alpine-glibc AS node
+FROM debian:bookworm-slim AS device
 LABEL "website"="https://github.com/mate-dev/mmrelaynode"
-RUN apk --update add --no-cache g++ shadow
+RUN apt-get update && apt-get install g++ -y
 WORKDIR /bin
 ADD https://github.com/mate-dev/mmrelaynode/releases/latest/download/meshtasticd_linux_amd64 /bin/meshtasticd
 RUN chmod +x meshtasticd 
