@@ -7,6 +7,7 @@ RUN chmod +x /usr/local/bin/wait-for-it.sh
 RUN ln -s /home/mesh/.local/bin/meshtastic /bin/meshtastic
 USER mesh
 COPY --chown=mesh:mesh meshtastic-matrix-relay /home/mesh/app
+COPY --chown=mesh:mesh --chmod=744 wait-for-it.sh /home/mesh/.local/bin/wait-for-it.sh
 WORKDIR /home/mesh/app
 RUN pip install -qq -r /home/mesh/app/requirements.txt --no-cache-dir
 RUN echo "export PATH=/home/mesh/.local/bin:\$PATH" >> /home/mesh/.bashrc
