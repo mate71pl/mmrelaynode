@@ -14,10 +14,9 @@ services:
       - mesh
     entrypoint: ["sh", "-c", "meshtasticd"]
     environment:
-      #   MESHTASTIC_COMMAND_1: "--set-owner 'LongName' --set-owner-short 'SHRT' --set-url https://meshtastic.org/e/#CgMSAQESDAgBOAFAA0gBUB5oAQ" 
-        #     MESHTASTIC_COMMAND_2: "--set mqtt.enabled true --set mqtt.address mqtt.meshtastic.org --set mqtt.username meshdev --set mqtt.password large4cats"
-      MESHTASTIC_COMMAND_1: "--config config.yaml"
-      # You can add as many MESHTASTIC_COMMAND_X as you need, they will be executed in order with a 30 second delay between
+      MESHTASTIC_COMMAND_1: "--set-owner 'LongName' --set-owner-short 'SHRT' --set-url https://meshtastic.org/e/#CgMSAQESDAgBOAFAA0gBUB5oAQ" 
+      MESHTASTIC_COMMAND_2: "--set mqtt.enabled true --set mqtt.address mqtt.meshtastic.org --set mqtt.username meshdev --set mqtt.password large4cats"
+      # You can add as many MESHTASTIC_COMMAND_X as you need, they will be executed in order with a 30 second delay between or add all your setup in one command.
 
   mmrelayapp:
     build: app
@@ -35,9 +34,9 @@ services:
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
       MATRIX_BOT_USER_ID: "@botuser:example.matrix.org"
-      MESHTASTIC_CONNECTION_TYPE: "serial" # "serial" or "network"
+      MESHTASTIC_CONNECTION_TYPE: "network" # "serial" or "network"
       MESHTASTIC_SERIAL_PORT: "/dev/ttyUSB0"
-      MESHTASTIC_HOST: "meshtastic.local"
+      MESHTASTIC_HOST: "mmrelaynode"
       MESHTASTIC_MESHNET_NAME: "Your Meshnet Name"
       MESHTASTIC_BROADCAST_ENABLED: "true"
       LOGGING_LEVEL: "info"
