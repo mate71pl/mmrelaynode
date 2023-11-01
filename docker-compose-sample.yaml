@@ -29,7 +29,7 @@ services:
       - mesh:/home/mesh
     networks:
       - mesh
-    entrypoint: [ "sh", "-c", "/home/mesh/.local/bin/wait-for-it.sh mmrelaynode:4403 -t 60 && python3 command_wrapper.py && python3 conf_wrapper.py && python3 main.py" ]
+    entrypoint: [ "sh", "-c", "sh /home/mesh/.local/bin/wait-for-it.sh mmrelaynode:4403 -t 60 && python3 command_wrapper.py && python3 conf_wrapper.py && python3 main.py" ]
     environment:
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
