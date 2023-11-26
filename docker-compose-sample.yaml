@@ -16,6 +16,7 @@ services:
     environment:
       MESHTASTIC_COMMAND_1: "--set-owner 'LongName' --set-owner-short 'SHRT' --set-url https://meshtastic.org/e/#CgMSAQESDAgBOAFAA0gBUB5oAQ" 
       MESHTASTIC_COMMAND_2: "--set mqtt.enabled true --set mqtt.address mqtt.meshtastic.org --set mqtt.username meshdev --set mqtt.password large4cats"
+      MESHTASTIC_COMMAND_3: "--ch-set uplink_enabled true --ch-set downlink_enabled true --ch-index 0"
       # You can add as many MESHTASTIC_COMMAND_X as you need, they will be executed in order with a 30 second delay between or add all your setup in one command.
 
   mmrelayapp:
@@ -29,7 +30,8 @@ services:
       - mesh:/home/mesh
     networks:
       - mesh
-    entrypoint: [ "sh", "-c", "sh /home/mesh/.local/bin/wait-for-it.sh mmrelaynode:4403 -t 60 && python3 command_wrapper.py && python3 conf_wrapper.py && python3 main.py" ]
+    #entrypoint: [ "sh", "-c", "sh /home/mesh/.local/bin/wait-for-it.sh mmrelaydevice:4403 -t 60 && python3 command_wrapper.py && python3 conf_wrapper.py && python3 main.py" ]
+    entrypoint: [ "bash", "-c", "entrypoint.sh" ]
     environment:
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
