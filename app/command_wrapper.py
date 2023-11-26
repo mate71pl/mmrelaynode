@@ -5,8 +5,10 @@ import time
 def execute_meshtastic_command(options):
     """Execute a meshtastic command with the given options."""
     command = ["meshtastic", "--host", "mmrelaydevice", "--port", "4403"] + options.split()
-    subprocess.run(command)
-    time.sleep(30)  # Pause for 30 seconds
+    print(f"Executing command: {' '.join(command)}")  # Add this line for debugging
+    result = subprocess.run(command, capture_output=True, text=True)
+    print(result.stdout)  # Add this line to print the output
+    time.sleep(15)  # Pause for 30 seconds
 
 # Loop through environment variables in sequence
 index = 1
@@ -17,6 +19,3 @@ while True:
         index += 1
     else:
         break
-
-# Finally, run the main Meshtastic process (or whatever process you want to keep the container running)
-subprocess.run(["meshtastic"])
