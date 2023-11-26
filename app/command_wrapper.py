@@ -4,7 +4,7 @@ import time
 
 def execute_meshtastic_command(options):
     """Execute a meshtastic command with the given options."""
-    command = ["meshtastic", "--set"] + options.split()
+    command = ["meshtastic", "--host", "mmrelaydevice", "--port", "4403"] + options.split()
     subprocess.run(command)
     time.sleep(30)  # Pause for 30 seconds
 
