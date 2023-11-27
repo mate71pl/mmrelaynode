@@ -25,3 +25,5 @@ Use the following command to see the output of command_wrapper.py & the MESHTAST
 ```
 docker exec -it mmrelaynode-app cat /home/mesh/app/command_output.txt
 ```
+
+Note: If you have several commands, it may take a few minutes to finish them all.
