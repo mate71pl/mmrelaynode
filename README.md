@@ -1,11 +1,13 @@
 ## MMRELAYNODE
-### A relay between Meshtastic and Matrix with native Meshtastic node connected via MQTT
+### A dockerized relay between Meshtastic and Matrix with native Meshtastic node connected via MQTT and the meshtastic node is virtualized too.
 
 The repository uses firmware built based on [https://github.com/meshtastic/firmware](https://github.com/meshtastic/firmware).
 
 Relay operation is implemented using the **Meshtastic <=> Matrix Relay** [https://github.com/geoffwhittington/meshtastic-matrix-relay](https://github.com/geoffwhittington/meshtastic-matrix-relay).
 
 Feel free to explore the **Meshtastic** project on their website: [https://meshtastic.org](https://meshtastic.org).
+
+This project consists of two containers `mmrealynode-app` and `mmrelaynode-device`.
 
 ```
 git clone https://github.com/mate-dev/mmrelaynode.git
