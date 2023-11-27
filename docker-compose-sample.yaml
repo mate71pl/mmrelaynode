@@ -32,7 +32,7 @@ services:
       MATRIX_BOT_USER_ID: "@botuser:example.matrix.org"
       MESHTASTIC_CONNECTION_TYPE: "network" # "serial" or "network"
       MESHTASTIC_SERIAL_PORT: "/dev/ttyUSB0"
-      MESHTASTIC_HOST: "mmrelaynode"
+      MESHTASTIC_HOST: "mmrelaydevice"
       MESHTASTIC_MESHNET_NAME: "Your Meshnet Name"
       MESHTASTIC_BROADCAST_ENABLED: "true"
       LOGGING_LEVEL: "info"
