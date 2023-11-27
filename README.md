@@ -9,6 +9,10 @@ Feel free to explore the **Meshtastic** project on their website: [https://mesht
 
 This project consists of two containers `mmrealynode-app` and `mmrelaynode-device`.
 
+First copy `docker-compose-sample.yaml` to `docker-compose.yaml` and customize it for your setup.
+
+To build the containers:
+
 ```
 git clone https://github.com/mate-dev/mmrelaynode.git
 cd mmrelaynode && git submodule update --init
