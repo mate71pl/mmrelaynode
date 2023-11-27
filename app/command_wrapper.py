@@ -13,7 +13,7 @@ def execute_meshtastic_command(options):
     result = subprocess.run(command, capture_output=True, text=True)
     log_to_file("Standard Output:\n" + result.stdout)
     log_to_file("Standard Error:\n" + result.stderr)
-    time.sleep(30)  # Pause for 30 seconds
+    time.sleep(1)  # Pause for 1 second between commands
 
 # Print all environment variables at the start
 log_to_file("All environment variables:\n" + str(os.environ))

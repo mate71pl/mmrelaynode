@@ -13,7 +13,7 @@ cd mmrelaynode && git submodule update --init
 docker compose -f "docker-compose.yaml" up -d --build
 ```
 
-If modifying scripts, with the containers stopped use these commands to rebuild them:
+If modifying the scripts, with the containers stopped, use these commands to rebuild them:
 
 ```
 docker system prune -af
