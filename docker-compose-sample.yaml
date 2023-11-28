@@ -27,12 +27,13 @@ services:
       - mesh
     entrypoint: [ "bash", "-c", "entrypoint.sh" ]
     environment:
+      ##### Do not change these variables or the scripts will break #####
+      MESHTASTIC_CONNECTION_TYPE: "network" # "serial" or "network"
+      MESHTASTIC_HOST: "mmrelaydevice"
+      ##### Change these variables to your needs #####
       MATRIX_HOMESERVER: "https://example.matrix.org"
       MATRIX_ACCESS_TOKEN: "your_access_token"
       MATRIX_BOT_USER_ID: "@botuser:example.matrix.org"
-      MESHTASTIC_CONNECTION_TYPE: "network" # "serial" or "network"
-      MESHTASTIC_SERIAL_PORT: "/dev/ttyUSB0"
-      MESHTASTIC_HOST: "mmrelaydevice"
       MESHTASTIC_MESHNET_NAME: "Your Meshnet Name"
       MESHTASTIC_BROADCAST_ENABLED: "true"
       LOGGING_LEVEL: "info"
@@ -41,15 +42,17 @@ services:
       MATRIX_ROOMS_MESHTASTIC_CHANNEL_1: "0"
       # MATRIX_ROOMS_ID_2: "#someroomalias2:example.matrix.org"
       # MATRIX_ROOMS_MESHTASTIC_CHANNEL_2: "1"
-      
+
       # Plugin environment variables
       # HEALTH_PLUGIN_ACTIVE: "true"
       # MAP_PLUGIN_ACTIVE: "true"
       # NODES_PLUGIN_ACTIVE: "true"
+
+      # You can add as many MESHTASTIC_COMMAND_X variables as you need, they will be executed in order
       MESHTASTIC_COMMAND_1: "--set-owner 'LongName' --set-owner-short 'SHRT' --set-url https://meshtastic.org/e/#CgMSAQESDAgBOAFAA0gBUB5oAQ" 
       MESHTASTIC_COMMAND_2: "--set mqtt.enabled true --set mqtt.address mqtt.meshtastic.org --set mqtt.username meshdev --set mqtt.password large4cats"
       MESHTASTIC_COMMAND_3: "--ch-set uplink_enabled true --ch-set downlink_enabled true --ch-index 0"
-      # You can add as many MESHTASTIC_COMMAND_X as you need, they will be executed in order
+
 
 networks:
   mesh:
