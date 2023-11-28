@@ -20,7 +20,7 @@ services:
     container_name: mmrelaynode-app
     restart: unless-stopped
     depends_on:
-      - mmrelayapp
+      - mmrelaydevice
     volumes:
       - mesh:/home/mesh
     networks:
