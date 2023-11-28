@@ -20,6 +20,21 @@ docker compose -f "docker-compose.yaml" up -d --build
 docker compose restart
 ```
 
+*Note: It is important to restart the containers after the first run so the virtual Meshtastic node can be rebooted after the `MESHTATIC_COMMAND_X:` commands that are definied in your `docker-compose.yaml` are issued.*
+
+
+Use the following command to see the output of command_wrapper.py & the MESHTASTIC_COMMAND_X commands:
+```
+docker exec -it mmrelaynode-app cat /home/mesh/app/command_output.txt
+```
+
+The commands will only be executed the first time the container is started. To re-run the commands, delete the file flag file and restart the container.
+
+To delete the flag file:
+```
+docker exec -it mmrelaynode-app rm /home/mesh/app/.commands_executed
+```
+
 If modifying the scripts, use these commands to rebuild the containers from scratch:
 
 ```
@@ -27,10 +42,3 @@ docker compose down --volumes
 docker compose build --no-cache
 docker compose up -d --force-recreate 
 ```
-
-Use the following command to see the output of command_wrapper.py & the MESHTASTIC_COMMAND_X commands:
-```
-docker exec -it mmrelaynode-app cat /home/mesh/app/command_output.txt
-```
-
-Note: If you have several commands, it may take a few minutes to finish them all.
