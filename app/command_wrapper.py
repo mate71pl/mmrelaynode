@@ -15,7 +15,7 @@ def execute_meshtastic_command(options):
     result = subprocess.run(command, capture_output=True, text=True)
     log_to_file("Standard Output:\n" + result.stdout)
     log_to_file("Standard Error:\n" + result.stderr)
-    #time.sleep(1)  # Pause for 1 second between commands
+    time.sleep(1)  # Pause for 1 second between commands
 
 if os.path.exists(flag_file):
     log_to_file("Commands have already been executed previously. Skipping.")
