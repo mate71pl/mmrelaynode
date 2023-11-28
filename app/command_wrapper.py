@@ -2,10 +2,15 @@ import os
 import subprocess
 import time
 
+output_file = '/home/mesh/app/command_output.txt'
 flag_file = '/home/mesh/app/.commands_executed'
 
+# Remove the output file if it exists
+if os.path.exists(output_file):
+    os.remove(output_file)
+
 def log_to_file(message):
-    with open('/home/mesh/app/command_output.txt', 'a') as f:
+    with open(output_file, 'a') as f:
         f.write(message + "\n")
 
 def execute_meshtastic_command(options):
