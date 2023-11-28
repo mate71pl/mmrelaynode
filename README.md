@@ -23,7 +23,7 @@ docker compose restart
 *Note: It is important to restart the containers after the first run so the virtual Meshtastic node can be rebooted after the `MESHTATIC_COMMAND_X:` commands that are definied in your `docker-compose.yaml` are issued.*
 
 
-Use the following command to see the output of command_wrapper.py & the MESHTASTIC_COMMAND_X commands:
+Use the following command to see the output of `command_wrapper.py` & the `MESHTASTIC_COMMAND_X` commands:
 ```
 docker exec -it mmrelaynode-app cat /home/mesh/app/command_output.txt
 ```
