@@ -27,7 +27,7 @@ services:
       - mesh
     entrypoint: [ "bash", "-c", "entrypoint.sh" ]
     environment:
-      ##### Do not change these variables or the scripts will break #####
+      ##### Do not change these variables or the scripts will break, values will be hardcoded in the future #####
       MESHTASTIC_CONNECTION_TYPE: "network" # "serial" or "network"
       MESHTASTIC_HOST: "mmrelaydevice"
       ##### Change these variables to your needs #####
