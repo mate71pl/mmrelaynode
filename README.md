@@ -3,7 +3,7 @@
 
 This project utilizes a virtual node built using [Meshtastic firmware](https://github.com/meshtastic/firmware). It emulates the capabilities of a physical device, facilitating direct communication with a conventional mesh network through the firmware's built-in MQTT functionality.
 
-The relay's functionality is facilitated by the [Meshtastic <=> Matrix Relay](https://github.com/geoffwhittington/meshtastic-matrix-relay) project.
+The relay's functionality is provided by the [Meshtastic <=> Matrix Relay](https://github.com/geoffwhittington/meshtastic-matrix-relay) project.
 
 Discover more about Meshtastic on their official site: [https://meshtastic.org](https://meshtastic.org).
 
