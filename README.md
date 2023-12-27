@@ -1,17 +1,17 @@
 ## MMRELAYNODE
-### A dockerized relay between Meshtastic and Matrix with native Meshtastic node connected via MQTT and the meshtastic node is virtualized too.
+### A Dockerized Relay for Meshtastic and Matrix featuring an Integrated Virtual Meshtastic Node communicating via MQTT
 
-The repository uses firmware built based on [https://github.com/meshtastic/firmware](https://github.com/meshtastic/firmware).
+This project utilizes a virtual node built using [Meshtastic firmware](https://github.com/meshtastic/firmware). It emulates the capabilities of a physical device, facilitating direct communication with a conventional mesh network through the firmware's built-in MQTT functionality.
 
-Relay operation is implemented using the **Meshtastic <=> Matrix Relay** [https://github.com/geoffwhittington/meshtastic-matrix-relay](https://github.com/geoffwhittington/meshtastic-matrix-relay).
+The relay's functionality is facilitated by the [Meshtastic <=> Matrix Relay](https://github.com/geoffwhittington/meshtastic-matrix-relay) project.
 
-Feel free to explore the **Meshtastic** project on their website: [https://meshtastic.org](https://meshtastic.org).
+Discover more about Meshtastic on their official site: [https://meshtastic.org](https://meshtastic.org).
 
 This project consists of two containers `mmrealynode-app` and `mmrelaynode-device`.
 
-First copy `docker-compose-sample.yaml` to `docker-compose.yaml` and customize it for your setup.
+Start by copying `docker-compose-sample.yaml` to `docker-compose.yaml` and tailor it to your needs.
 
-To build the containers:
+For container setup:
 
 ```
 git clone https://github.com/mate-dev/mmrelaynode.git
@@ -20,22 +20,22 @@ docker compose -f "docker-compose.yaml" up -d --build
 docker compose restart
 ```
 
-*Note: It is important to restart the containers after the first run so the virtual Meshtastic node can be rebooted after the `MESHTATIC_COMMAND_X:` commands that are definied in your `docker-compose.yaml` are issued.*
+*Important: Restart the containers after the initial launch. This reboot enables the virtual Meshtastic node to apply the changes from the `MESHTATIC_COMMAND_X:` commands after being executed by the script.*
 
 
-Use the following command to see the output of `command_wrapper.py` & the `MESHTASTIC_COMMAND_X` commands:
+To view outputs from `command_wrapper.py` & `MESHTASTIC_COMMAND_X` commands:
 ```
 docker exec -it mmrelaynode-app cat /home/mesh/app/command_output.txt
 ```
 
-The commands will only be executed the first time the container is started. To re-run the commands, delete the file flag file and restart the container.
+These commands are executed only upon the first launch of the container. To re-execute, remove the flag file and restart the container.
 
-To delete the flag file:
+To remove the flag file:
 ```
 docker exec -it mmrelaynode-app rm /home/mesh/app/.commands_executed
 ```
 
-If modifying the scripts, use these commands to rebuild the containers from scratch:
+For script modifications and rebuilding containers from scratch, use:
 
 ```
 docker compose down --volumes
