@@ -9,7 +9,7 @@ The relay operations are provided by the [Meshtastic <=> Matrix Relay](https://g
 
 Discover more about Meshtastic on their official site: [https://meshtastic.org](https://meshtastic.org).
 
-#### **Installation & Setup**
+### **Installation & Setup**
 
 This project consists of two containers `mmrealynode-app` and `mmrelaynode-device`. Start by copying `docker-compose-sample.yaml` to `docker-compose.yaml` and tailor it to your needs.
 
