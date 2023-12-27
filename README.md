@@ -1,5 +1,7 @@
 ## MMRELAYNODE
-### A Dockerized Relay for Meshtastic and Matrix featuring an Integrated Virtual Meshtastic Node communicating via MQTT
+### *A Dockerized Relay for Meshtastic and Matrix featuring an Integrated Virtual Meshtastic Node communicating via MQTT*
+
+#### **Introduction**
 
 This project utilizes a virtual node built using [Meshtastic firmware](https://github.com/meshtastic/firmware). It emulates the capabilities of a physical device, facilitating direct communication with a conventional mesh network through the firmware's built-in MQTT functionality.
 
@@ -7,9 +9,9 @@ The relay operations are provided by the [Meshtastic <=> Matrix Relay](https://g
 
 Discover more about Meshtastic on their official site: [https://meshtastic.org](https://meshtastic.org).
 
-This project consists of two containers `mmrealynode-app` and `mmrelaynode-device`.
+#### **Installation & Setup**
 
-Start by copying `docker-compose-sample.yaml` to `docker-compose.yaml` and tailor it to your needs.
+This project consists of two containers `mmrealynode-app` and `mmrelaynode-device`. Start by copying `docker-compose-sample.yaml` to `docker-compose.yaml` and tailor it to your needs.
 
 For container setup:
 
@@ -22,6 +24,7 @@ docker compose restart
 
 *Important: Restart the containers after the initial launch. This reboot enables the virtual Meshtastic node to apply the changes from the `MESHTATIC_COMMAND_X:` commands after being executed by the script.*
 
+#### **Additional Operational Commands***
 
 To view outputs from `command_wrapper.py` & `MESHTASTIC_COMMAND_X` commands:
 ```
