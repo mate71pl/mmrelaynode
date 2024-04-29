@@ -6,7 +6,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -19,10 +19,10 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get -y install wget g++ zip ca-certificates
+          sudo apt-get -y install wget g++ zip ca-certificates cmake libyaml-cpp-dev libgpiod-dev libbluetooth-dev
           pip install --upgrade pip
           pip install platformio
-          
+
       - name: Clone Meshtastic repository and compile firmware
         run: |
           git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware
@@ -32,13 +32,15 @@ jobs:
           # Extract tag from version.properties 
           TAG=$(curl -s https://raw.githubusercontent.com/meshtastic/firmware/master/version.properties | sed -nE 's/major = ([0-9]+)/\1./p; s/minor = ([0-9]+)/\1./p; s/build = ([0-9]+)/\1/p' | tr -d '\n'; echo)
           echo "TAG=amd64-v$TAG" >> $GITHUB_ENV  # Set variable for next steps
-          
+      - name: Display directory structure
+        run: |
+          tree /tmp/firmware/release
       - name: Upload firmware to release
         id: upload-release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /tmp/firmware/release/meshtasticd_linux_amd64
+          file: /tmp/firmware/release/meshtasticd_linux_x86_64
           asset_name: meshtasticd_linux_amd64
           tag: ${{ env.TAG }}
           overwrite: true
