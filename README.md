@@ -45,3 +45,17 @@ docker compose down --volumes
 docker compose build --no-cache
 docker compose up -d --force-recreate 
 ```
+
+### Health Check
+
+A Python script in the app container can sometimes hang due to a connection problem with the device container, halting its operation. Therefore, it's worth adding a health check that monitors the app container logs and restarts the container if an error is detected.
+
+The simplest way to perform the check is to use cron, which will check the logs every minute. To do this, we go into edit mode with `crontab -e` and add the path to the `healthcheck.sh` file (remember to leave the last line empty).
+
+```
+user@server$ crontab -e
+
+# m h  dom mon dow   command
+* * * * * /bin/bash /path/to/file/mmrelaynode/healthcheck.sh
+
+```
