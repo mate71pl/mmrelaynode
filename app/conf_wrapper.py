@@ -49,6 +49,10 @@ nodes_plugin_active = os.environ.get('NODES_PLUGIN_ACTIVE')
 if nodes_plugin_active:
     plugins_config["nodes"] = {"active": nodes_plugin_active.lower() == "true"}
 
+nodes_plugin_active = os.environ.get('CHUTILZ_PLUGIN_ACTIVE')
+if nodes_plugin_active:
+        plugins_config["chutilz"] = {"active": chutilz_plugin_active.lower() == "true"}
+
 # Add the plugins dictionary to the relay_config if it's not empty
 if plugins_config:
     relay_config["plugins"] = plugins_config
