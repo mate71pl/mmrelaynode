@@ -49,9 +49,25 @@ nodes_plugin_active = os.environ.get('NODES_PLUGIN_ACTIVE')
 if nodes_plugin_active:
     plugins_config["nodes"] = {"active": nodes_plugin_active.lower() == "true"}
 
-nodes_plugin_active = os.environ.get('CHUTILZ_PLUGIN_ACTIVE')
-if nodes_plugin_active:
-        plugins_config["chutilz"] = {"active": chutilz_plugin_active.lower() == "true"}
+chutilz_plugin_active = os.environ.get('CHUTILZ_PLUGIN_ACTIVE')
+if chutilz_plugin_active:
+    plugins_config["chutilz"] = {"active": chutilz_plugin_active.lower() == "true"}
+
+airutilz_plugin_active = os.environ.get('AIRUTILZ_PLUGIN_ACTIVE')
+if airutilz_plugin_active:
+    plugins_config["airutilz"] = {"active": airutilz_plugin_active.lower() == "true"}
+
+battery_plugin_active = os.environ.get('BATTERY_PLUGIN_ACTIVE')
+if battery_plugin_active:
+    plugins_config["battery"] = {"active": battery_plugin_active.lower() == "true"}
+
+voltage_plugin_active = os.environ.get('VOLTAGE_PLUGIN_ACTIVE')
+if voltage_plugin_active:
+    plugins_config["voltage"] = {"active": voltage_plugin_active.lower() == "true"}
+
+snr_plugin_active = os.environ.get('SNR_PLUGIN_ACTIVE')
+if snr_plugin_active:
+    plugins_config["snr"] = {"active": snr_plugin_active.lower() == "true"}
 
 # Add the plugins dictionary to the relay_config if it's not empty
 if plugins_config:
@@ -60,3 +76,4 @@ if plugins_config:
 # Write the configuration to config.yaml
 with open("config.yaml", "w") as f:
     yaml.dump(relay_config, f)
+
