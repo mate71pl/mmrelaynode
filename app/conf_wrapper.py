@@ -76,4 +76,3 @@ if plugins_config:
 # Write the configuration to config.yaml
 with open("config.yaml", "w") as f:
     yaml.dump(relay_config, f)
-

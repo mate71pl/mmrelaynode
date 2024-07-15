@@ -1,1 +1,1 @@
-docker logs mmrelaynode-app 2>&1 | tail -n 5 | grep -q -e 'BrokenPipeError' -e 'ERROR:Matrix' -e 'ERROR:Meshtastic' -e 'AttributeError' && docker restart mmrelaynode-app && echo "$(date '+%Y-%m-%d [%H:%M:%S] - Node restart!')"
+docker logs mmrelaynode-app 2>&1 | tail -n 5 | grep -q -E 'BrokenPipeError|ERROR:Matrix|ERROR:Meshtastic|AttributeError' && docker restart mmrelaynode-app && echo "$(date '+%Y-%m-%d [%H:%M:%S] - Node restart!')" >> $HOME/docker/mmrelaynode/healthcheck.log
