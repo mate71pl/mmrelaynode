@@ -16,7 +16,7 @@ This project consists of two containers `mmrealynode-app` and `mmrelaynode-devic
 For container setup:
 
 ```
-git clone https://github.com/mate-dev/mmrelaynode.git
+git clone https://github.com/mate71pl/mmrelaynode.git
 cd mmrelaynode && git submodule update --init
 docker compose -f "docker-compose.yaml" up -d --build
 docker compose restart
