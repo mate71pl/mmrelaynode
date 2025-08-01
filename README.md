@@ -1,4 +1,9 @@
-# MMRELAYNODE
+
+## I'm done with the mmrelaynode development. The source project's got plenty of features and configuration options now, so there's really nothing more to improve. :)
+
+# Everyone interested is invited to visit the project page [Meshtastic <=> Matrix Relay](https://github.com/jeremiah-k/meshtastic-matrix-relay)
+
+## MMRELAYNODE
 ## *A Dockerized Relay for Meshtastic and Matrix featuring an Integrated Virtual Meshtastic Node communicating via MQTT*
 
 ### **Introduction**
